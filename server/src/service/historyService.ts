@@ -1,5 +1,6 @@
 // TODO: Define a City class with name and id properties
 class City {
+  cityName: string;
   
 }
 // TODO: Complete the HistoryService class
