@@ -8,7 +8,9 @@ import historyService from '../../service/historyService';
 import weatherService from '../../service/weatherService';
 
 // TODO: POST Request with city name to retrieve weather data
-router.post('/', async (req, res) => {
+
+
+
 // TODO: GET weather data from city name
 router.get('/', async (_req, res) => {
   try {
@@ -21,7 +23,6 @@ router.get('/', async (_req, res) => {
 });
 
 // TODO: save city to search history
-});
 
 // TODO: GET search history
 
