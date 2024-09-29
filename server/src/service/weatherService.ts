@@ -3,17 +3,23 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // TODO: Define an interface for the Coordinates object
+interface Coordinates {
+  lat: number;
+  lon: number  
+}
 
 // TODO: Define a class for the Weather object
 class Weather {
-  temperature: number;
-  windSpeed: number;
-  humidity: number;
-
-  constructor(temperature: number, windSpeed: number, humidity: number) {
-    this.temperature = temperature;
-    this.windSpeed = windSpeed;
-    this.humidity = humidity;
+  id: number;
+  main: number[];
+  description: string;
+  icon: string;
+  
+  constructor(id: number, main: number[], description: string, icon: string) {
+    this.id = id;
+    this.main = main;
+    this.description = description;
+    this.icon = icon
   }
 }
 
@@ -34,13 +40,13 @@ class WeatherService {
   private async fetchLocationData(query: string) {
     try {
       const response = await fetch(
-        `${this.baseURL}/data/2.5/forecast?lat={lat}&lon={lon}&appid=${this.apiKey}`
+        `${this.baseURL}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${this.apiKey}`
       );
 
-      const weather = await response.json();
-
-      const mappedWeather = await this.weatherDataMapping(weather.data);
-      return mappedWeather;
+      const location = await response.json();
+      const destructureLocations = await this.destructureLocationData(location.data);      
+      return destructureLocations;
+      
     } catch (err) {
       console.log('Error:', err);
       return err;
